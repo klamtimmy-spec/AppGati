@@ -1,0 +1,75 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #ffffff;
+    overflow: hidden; /* Evita que se formen barras de desplazamiento cuando el botón se mueve */
+}
+
+.contenedor {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+}
+
+.oculto {
+    display: none !important;
+}
+
+img {
+    max-width: 300px;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.mensaje-exito {
+    color: #d32f2f;
+}
+
+.botones {
+    display: flex;
+    gap: 20px;
+    position: relative;
+    justify-content: center;
+    width: 100%;
+}
+
+button {
+    padding: 10px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+    transition: transform 0.2s ease;
+}
+
+#btn-si {
+    background-color: #28a745;
+    z-index: 10; /* Asegura que el botón Sí siempre esté por encima */
+}
+
+#btn-no {
+    background-color: #dc3545;
+    position: relative;
+    z-index: 5;
+}
