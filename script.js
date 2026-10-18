@@ -3,7 +3,7 @@ const btnSi = document.getElementById('btn-si');
 const pantalla1 = document.getElementById('pantalla-1');
 const pantalla2 = document.getElementById('pantalla-2');
 const imagenGato = document.getElementById('imagen-gato');
-const musicaFondo = document.getElementById('musica-fondo'); // Conecta el audio
+const musicaFondo = document.getElementById('musica-fondo');
 
 const frasesNo = [
     "¿Seguro que no quieres volver a ser mi amigo?",
@@ -29,6 +29,20 @@ const imagenesNo = [
 
 let indice = 0;
 let nivelCrecimientoSi = 1;
+
+// NUEVO: Intentar reproducir la música al primer toque en cualquier parte de la pantalla
+function iniciarMusica() {
+    musicaFondo.play().catch(() => {
+        // Si el navegador lo bloquea, no hace nada y espera el siguiente clic
+    });
+    // Se elimina el evento para que no intente reproducirse cada vez que tocan la pantalla
+    document.removeEventListener('click', iniciarMusica);
+    document.removeEventListener('touchstart', iniciarMusica);
+}
+
+// Detecta el primer clic o toque en el celular
+document.addEventListener('click', iniciarMusica);
+document.addEventListener('touchstart', iniciarMusica);
 
 function moverBotonNo() {
     btnNo.textContent = frasesNo[indice];
@@ -60,7 +74,4 @@ btnNo.addEventListener('touchstart', function(e) {
 btnSi.addEventListener('click', function() {
     pantalla1.classList.add('oculto');
     pantalla2.classList.remove('oculto');
-    
-    // Reproduce la música al dar el Sí
-    musicaFondo.play(); 
 });
