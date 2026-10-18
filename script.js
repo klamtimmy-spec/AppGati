@@ -2,8 +2,8 @@ const btnNo = document.getElementById('btn-no');
 const btnSi = document.getElementById('btn-si');
 const pantalla1 = document.getElementById('pantalla-1');
 const pantalla2 = document.getElementById('pantalla-2');
+const imagenGato = document.getElementById('imagen-gato');
 
-// Textos que irán cambiando en el botón No
 const frasesNo = [
     "¿Seguro que no quieres volver a ser mi amigo?",
     "¿Ni compartir recuerdos?",
@@ -15,42 +15,49 @@ const frasesNo = [
     "¿De verdad no quieres volver a ser mi amigo?"
 ];
 
-let indiceFrase = 0;
+// Nombres de las imágenes que cambian con cada frase
+const imagenesNo = [
+    "triste1.jpg",
+    "triste2.jpg",
+    "triste3.jpg",
+    "triste4.jpg",
+    "triste1.jpg", // Se repiten si no tienes 8 fotos distintas
+    "triste2.jpg",
+    "triste3.jpg",
+    "triste4.jpg"
+];
+
+let indice = 0;
 let nivelCrecimientoSi = 1;
 
 function moverBotonNo() {
-    // Cambiar el texto del botón
-    btnNo.textContent = frasesNo[indiceFrase];
-    indiceFrase = (indiceFrase + 1) % frasesNo.length;
+    // Cambia el texto y la imagen simultáneamente
+    btnNo.textContent = frasesNo[indice];
+    imagenGato.src = imagenesNo[indice];
+    
+    indice = (indice + 1) % frasesNo.length;
 
-    // Calcular nuevas coordenadas aleatorias dentro de la ventana
-    // Se resta el tamaño del botón para que no se salga de los bordes
     const maxX = window.innerWidth - btnNo.offsetWidth - 20;
     const maxY = window.innerHeight - btnNo.offsetHeight - 20;
     
     const xAleatorio = Math.max(10, Math.random() * maxX);
     const yAleatorio = Math.max(10, Math.random() * maxY);
 
-    // Cambiar posición a absoluta para moverlo libremente
     btnNo.style.position = 'absolute';
     btnNo.style.left = `${xAleatorio}px`;
     btnNo.style.top = `${yAleatorio}px`;
 
-    // Hacer que el botón Sí crezca
     nivelCrecimientoSi += 0.3;
     btnSi.style.transform = `scale(${nivelCrecimientoSi})`;
 }
 
-// Evento para computadoras (cuando el mouse pasa por encima)
 btnNo.addEventListener('mouseover', moverBotonNo);
 
-// Evento para teléfonos móviles (cuando el dedo toca la pantalla)
 btnNo.addEventListener('touchstart', function(e) {
-    e.preventDefault(); // Evita que se registre el clic en el teléfono
+    e.preventDefault();
     moverBotonNo();
 });
 
-// Evento para el botón Sí
 btnSi.addEventListener('click', function() {
     pantalla1.classList.add('oculto');
     pantalla2.classList.remove('oculto');
