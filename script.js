@@ -3,6 +3,7 @@ const btnSi = document.getElementById('btn-si');
 const pantalla1 = document.getElementById('pantalla-1');
 const pantalla2 = document.getElementById('pantalla-2');
 const imagenGato = document.getElementById('imagen-gato');
+const musicaFondo = document.getElementById('musica-fondo'); // Conecta el audio
 
 const frasesNo = [
     "¿Seguro que no quieres volver a ser mi amigo?",
@@ -15,13 +16,12 @@ const frasesNo = [
     "¿De verdad no quieres volver a ser mi amigo?"
 ];
 
-// Nombres de las imágenes que cambian con cada frase
 const imagenesNo = [
     "triste1.jpg",
     "triste2.jpg",
     "triste3.jpg",
     "triste4.jpg",
-    "triste1.jpg", // Se repiten si no tienes 8 fotos distintas
+    "triste1.jpg",
     "triste2.jpg",
     "triste3.jpg",
     "triste4.jpg"
@@ -31,7 +31,6 @@ let indice = 0;
 let nivelCrecimientoSi = 1;
 
 function moverBotonNo() {
-    // Cambia el texto y la imagen simultáneamente
     btnNo.textContent = frasesNo[indice];
     imagenGato.src = imagenesNo[indice];
     
@@ -61,4 +60,7 @@ btnNo.addEventListener('touchstart', function(e) {
 btnSi.addEventListener('click', function() {
     pantalla1.classList.add('oculto');
     pantalla2.classList.remove('oculto');
+    
+    // Reproduce la música al dar el Sí
+    musicaFondo.play(); 
 });
